@@ -99,11 +99,17 @@ func whoamI(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 
+	printEnvironment(w)
+
+	req.Write(w)
+}
+
+func printEnvironment(w http.ResponseWriter) {
+	fmt.Fprintln(w, "--- Environment variables ---")
 	for _, envVar := range os.Environ() {
 		fmt.Fprintln(w, envVar)
 	}
-
-	req.Write(w)
+	fmt.Fprintln(w, "---")
 }
 
 func api(w http.ResponseWriter, req *http.Request) {
