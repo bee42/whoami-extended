@@ -98,6 +98,11 @@ func whoamI(w http.ResponseWriter, req *http.Request) {
 			fmt.Fprintln(w, "IP:", ip)
 		}
 	}
+
+	for _, envVar := range os.Environ() {
+		fmt.Fprintln(w, envVar)
+	}
+
 	req.Write(w)
 }
 
